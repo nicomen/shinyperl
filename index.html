@@ -94,7 +94,6 @@ class Point {
 
 Point->new(5,10)->describe; # A point at (5,10)
 </code></pre></div>
-</div>
 <div><h2>Easy interaction with CSV</h2>
 <pre><code>use Text::CSV_XS qw( csv );
 
@@ -109,6 +108,8 @@ csv (in => $aoa, out => "file.csv", sep_char=> ";");
 # Only show lines where "code" is odd
 csv (in => "data.csv", filter => { code => sub { $_ % 2 }});
 </code></pre>
+</div>
+
 </div>
 <script>
 $( document ).ready(function() {
