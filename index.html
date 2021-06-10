@@ -4,8 +4,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&display=swap" rel="stylesheet">
 <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/stackoverflow-dark.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/stackoverflow-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <style>
 body {
@@ -13,7 +13,9 @@ body {
   margin: 5em;
   background-color: aliceblue;
 }
+#logo { height: 1em; margin: auto 0.5rem; vertical-align: sub; }
 h1,h2 { margin: 0 }
+h1 { display: inline; margin-right: 1em; }
 #slideshow { 
   margin: 50px auto; 
   position: relative; 
@@ -31,14 +33,16 @@ pre > code {
   right: 2em; 
   bottom: 2em; 
 }
+div#footer { margin: auto; text-align: center; position: absolute; bottom: 1rem; }
 </style>
 </head>
 <body>
-<h1>Perl is shiny</h1>
-<div id="slideshow">
+<h1><img src="perl.svg" id="logo">Perl is shiny</h1>
+<span>Have fun with perl!</span>
+<div id="slideshow" onclick="next_slide">
   <div><h2>Objects with Moo</h2>
 <pre>
-<code class="language-perl">package Point;
+<code>package Point;
 
 use Moo;
 
@@ -54,7 +58,7 @@ Point->new(4,2)->describe; # A point at (4,2)
   </div>
   <div><h2>Fetch a random quote</h2>
 <pre>
-<code class="language-perl">use Mojo::UserAgent;
+<code>use Mojo::UserAgent;
 
 my $agent = Mojo::UserAgent->new;
 
@@ -67,7 +71,8 @@ print join " &mdash; ", ($quote->all_text, $author->all_text)'
 # Perl is shiny &mdash; Perl Hacker
 </code></pre>
   </div>
-  <div><h2><pre><code>use Object::Pad;
+  <div><h2>Objects with Object::Pad</h2>
+  <pre><code>use Object::Pad;
 
 class Point {
    has $x = 0;
@@ -94,7 +99,10 @@ Point->new(5,10)->describe; # A point at (5,10)
 $( document ).ready(function() {
   hljs.highlightAll();
   $("#slideshow > div:gt(0)").hide();
-  setInterval(function() { 
+  next_slide();
+});
+function next_slide() {
+  setInterval(function() {
     $('#slideshow > div:first')
     .fadeOut(1000)
     .next()
@@ -102,7 +110,8 @@ $( document ).ready(function() {
     .end()
     .appendTo('#slideshow');
   }, 10000);
-});
+}
 </script>
+<div id="footer">Want to see more shiny perl code here? Add a pull request at <a href="https://github.com/nicomen/shinyperl">https://github.com/nicomen/shinyperl</a></div>
 </body>
 </html>
