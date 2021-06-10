@@ -47,8 +47,8 @@ div#footer { margin: auto; text-align: center; position: absolute; bottom: 1rem;
 
 use Moo;
 
-has 'x' => isa => sub { m{\d+} };
-has 'y' => isa => sub { m{\d+} };
+has 'x' => isa => sub { m{\d+} } => is => 'rw';
+has 'y' => isa => sub { m{\d+} } => is => 'rw';
 
 sub describe {
   print "A point at ($x, $y)";
