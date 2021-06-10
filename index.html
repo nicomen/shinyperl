@@ -42,15 +42,14 @@ pre > code {
 
 use Moo;
 
-has 'x' => isa => sub { /\d+/ };
-has 'x' => isa => sub { /\d+/ };
-</code></pre>
-<pre><code class="language-perl">use Point;
+has 'x' => isa => sub { m{\d+} };
+has 'y' => isa => sub { m{\d+} };
 
-my $p = Point->new(4,2);
+sub describe {
+  print "A point at ($x, $y)";
+}
 
-$p->x; # 4
-
+Point->new(4,2)->describe; # A point at (4,2)
 </code></pre>
   </div>
   <div><h2>Fetch a random quote</h2>
@@ -64,31 +63,31 @@ my $tx = $agent->get("http://www.quotationspage.com/random.php");
 my $quote  = $tx->res->dom->at("dt");
 my $author = $quote->next->at("b");
 
-print join " – ", ($quote->all_text, $author->all_text)'
-# Perl is shiny – Perl Hacker
+print join " &mdash; ", ($quote->all_text, $author->all_text)'
+# Perl is shiny &mdash; Perl Hacker
 </code></pre>
   </div>
   <div><h2><pre><code>use Object::Pad;
- 
+
 class Point {
    has $x = 0;
    has $y = 0;
- 
+
    BUILD {
      ($x, $y) = @_;
    }
- 
+
    method move ($dX, $dY) {
       $x += $dX;
       $y += $dY;
    }
- 
+
    method describe {
-      print "A point at ($x, $y)\n";
+      print "A point at ($x, $y)";
    }
 }
- 
-Point->new(5,10)->describe;
+
+Point->new(5,10)->describe; # A point at (5,10)
 </code></pre></div>
 </div>
 <script>
