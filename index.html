@@ -1,0 +1,109 @@
+<html charset="UTF-8">
+<head>
+<title>Perl is shiny!</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/stackoverflow-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<style>
+body {
+  font-family: 'Baloo Tammudu 2', cursive;
+  margin: 5em;
+  background-color: aliceblue;
+}
+h1,h2 { margin: 0 }
+#slideshow { 
+  margin: 50px auto; 
+  position: relative; 
+  width: 40em; 
+  height: 20em; 
+  padding: 2em; 
+}
+pre > code {
+  box-shadow: 0 0 20px rgba(0,0,0,0.4) !important;
+}
+#slideshow > div { 
+  position: absolute; 
+  top: 2em; 
+  left: 2em; 
+  right: 2em; 
+  bottom: 2em; 
+}
+</style>
+</head>
+<body>
+<h1>Perl is shiny</h1>
+<div id="slideshow">
+  <div><h2>Objects with Moo</h2>
+<pre>
+<code class="language-perl">package Point;
+
+use Moo;
+
+has 'x' => isa => sub { /\d+/ };
+has 'x' => isa => sub { /\d+/ };
+</code></pre>
+<pre><code class="language-perl">use Point;
+
+my $p = Point->new(4,2);
+
+$p->x; # 4
+
+</code></pre>
+  </div>
+  <div><h2>Fetch a random quote</h2>
+<pre>
+<code class="language-perl">use Mojo::UserAgent;
+
+my $agent = Mojo::UserAgent->new;
+
+my $tx = $agent->get("http://www.quotationspage.com/random.php");
+
+my $quote  = $tx->res->dom->at("dt");
+my $author = $quote->next->at("b");
+
+print join " – ", ($quote->all_text, $author->all_text)'
+# Perl is shiny – Perl Hacker
+</code></pre>
+  </div>
+  <div><h2><pre><code>use Object::Pad;
+ 
+class Point {
+   has $x = 0;
+   has $y = 0;
+ 
+   BUILD {
+     ($x, $y) = @_;
+   }
+ 
+   method move ($dX, $dY) {
+      $x += $dX;
+      $y += $dY;
+   }
+ 
+   method describe {
+      print "A point at ($x, $y)\n";
+   }
+}
+ 
+Point->new(5,10)->describe;
+</code></pre></div>
+</div>
+<script>
+$( document ).ready(function() {
+  hljs.highlightAll();
+  $("#slideshow > div:gt(0)").hide();
+  setInterval(function() { 
+    $('#slideshow > div:first')
+    .fadeOut(1000)
+    .next()
+    .fadeIn(1000)
+    .end()
+    .appendTo('#slideshow');
+  }, 10000);
+});
+</script>
+</body>
+</html>
