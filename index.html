@@ -53,6 +53,7 @@ has 'y' => is => 'rw', isa => sub { m{\A\d+\z} };
 
 sub describe {
   my ($self) = @_;
+
   printf "A point at (%d, %d)", $self->x, $self->y;
 }
 
