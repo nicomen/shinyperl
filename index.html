@@ -47,15 +47,15 @@ div#footer { margin: auto; text-align: center; position: absolute; bottom: 1rem;
 
 use Moo;
 
-has 'x' => isa => sub { m{\d+} } => is => 'rw';
-has 'y' => isa => sub { m{\d+} } => is => 'rw';
+has 'x' => is => 'rw', isa => sub { m{\A\d+\z} };
+has 'y' => is => 'rw', isa => sub { m{\A\d+\z} };
 
 sub describe {
   my ($self) = @_;
   printf "A point at (%d, %d)", $self->x, $self->y;
 }
 
-Point->new( x => 4, y => 2)->describe; # A point at (4,2)
+Point->new( x => 4, y => 2 )->describe; # A point at (4,2)
 </code></pre>
   </div>
   <div><h2>Fetch a random quote</h2>
