@@ -51,7 +51,8 @@ has 'x' => isa => sub { m{\d+} } => is => 'rw';
 has 'y' => isa => sub { m{\d+} } => is => 'rw';
 
 sub describe {
-  print "A point at ($x, $y)";
+  my ($self) = @_;
+  printf "A point at (%d, %d)", $self->x, $self->y;
 }
 
 Point->new(4,2)->describe; # A point at (4,2)
