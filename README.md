@@ -2,7 +2,7 @@
 
 If you think something is wrong, plase file an issue.
 
-If you want to add a snippet of shiny perl add a uppl request with an addition in the snippets/ directory.
+If you want to add a snippet of shiny perl add a pull request with an addition in the snippets/ directory.
 
 ### Snippet format ###
 
