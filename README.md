@@ -11,7 +11,7 @@ The intention is that any file in the snippet should be able to execute and be v
 The format is basically:
 
 ```
-#/usr/bin/env perl # [% title = 'Title of snippet'; BLOCK code %]
+#!/usr/bin/env perl # [% title = 'Title of snippet'; BLOCK code %]
 
 … Valid Perl code …
 
