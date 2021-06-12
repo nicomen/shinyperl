@@ -24,89 +24,18 @@
 <body>
 <h1><img src="perl.svg" id="logo">Perl is shiny</h1>
 <span>Have fun with perl!</span>
-<div id="slideshow">  <div>
-    <div class="slide"><h2>Easy interaction with CSV</h2>
-      <pre><code>
-use Text::CSV_XS qw( csv );
-
-# Read whole file in memory
-my $aoa = csv (in => "data.csv");    # as array of array
-my $aoh = csv (in => "data.csv",
-               headers => "auto");   # as array of hash
-
-# Write array of arrays as csv file
-csv (in => $aoa, out => "file.csv", sep_char=> ";");
-
-# Only show lines where "code" is odd
-csv (in => "data.csv", filter => { code => sub { $_ % 2 }});
-
-</code></pre>
+<div id="slideshow">
+[% USE dir = Directory('snippets') %]
+[% FOR snippet IN dir.files %]
+[%   title = snippet.name.replace("\.pl$", ""); %]
+[%   PROCESS $snippet.path | replace('#!.*', '') %]
+  <div>
+    <div class="slide"><h2>[% title %]</h2>
+      <pre><code>[% PROCESS code | replace('#!.*', '') %]</code></pre>
     </div>
-  </div>  <div>
-    <div class="slide"><h2>Fetch a random quote</h2>
-      <pre><code>
-use Mojo::UserAgent;
-
-my $agent = Mojo::UserAgent->new;
-
-my $tx = $agent->get("http://www.quotationspage.com/random.php");
-
-my $quote  = $tx->res->dom->at("dt");
-my $author = $quote->next->at("b");
-
-print join " &mdash; ", ($quote->all_text, $author->all_text);
-# Perl is shiny &mdash; Perl Hacker
-
-</code></pre>
-    </div>
-  </div>  <div>
-    <div class="slide"><h2>Objects with Moo</h2>
-      <pre><code>
-package Point;
-
-use Moo;
-
-has 'x' => is => 'rw', isa => sub { m{\A\d+\z} };
-has 'y' => is => 'rw', isa => sub { m{\A\d+\z} };
-
-sub describe {
-  my ($self) = @_;
-
-  printf "A point at (%d,%d)", $self->x, $self->y;
-}
-
-Point->new( x => 4, y => 2 )->describe; # A point at (4,2)
-
-</code></pre>
-    </div>
-  </div>  <div>
-    <div class="slide"><h2>Objects with Object::Pad</h2>
-      <pre><code>
-use Object::Pad;
-
-class Point {
-   has $x = 0;
-   has $y = 0;
-
-   BUILD {
-     ($x, $y) = @_;
-   }
-
-   method move ($dX, $dY) {
-      $x += $dX;
-      $y += $dY;
-   }
-
-   method describe {
-      print "A point at ($x,$y)";
-   }
-}
-
-Point->new(5,10)->describe; # A point at (5,10)
-
-</code></pre>
-    </div>
-  </div></div>
+  </div>
+[% END %]
+</div>
 <div id="footer">Want to see more shiny perl code here? Add a pull request at <a href="https://github.com/nicomen/shinyperl">https://github.com/nicomen/shinyperl</a></div>
 </body>
 </html>

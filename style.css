@@ -1,0 +1,42 @@
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 50%;
+    margin: 0.5rem !important;
+  }
+}
+body {
+  font-family: 'Baloo Tammudu 2', cursive;
+  margin: 2rem;
+  background-color: #92b5b0;
+}
+#logo { height: 1.5em; margin-right: 0.5rem; vertical-align: middle; }
+h1,h2 { margin: 0 }
+h1 { display: inline; margin-right: 1rem; }
+div#footer { margin: auto; text-align: center; }
+
+.slick-slide { padding: 1rem; text-align: center; height: auto; } 
+.slide { display: inline-block; }
+
+pre { white-space: pre-wrap; user-select: text; text-align: left; }
+pre code.hljs {
+  padding: 0rem 0.5rem;
+  display: inline-block; 
+  margin: auto;
+}
+
+.slick-prev { left: 2%; z-index: 1000; }
+.slick-next { right: 2%; }
+.slick-prev:before,
+.slick-next:before {
+  color: #ffffff !important;
+}
+@media only screen and (min-width: 600px) {
+  .slick-next, .slick-prev { width: 5%; width: 5%; font-size: 10rem; }
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 4rem;
+  }
+  pre code.hljs {
+    padding: 0.5rem 1.5rem !important;
+  }
+}
