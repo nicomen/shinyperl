@@ -8,7 +8,7 @@ body {
   font-family: 'Baloo Tammudu 2', cursive;
   margin: 2rem;
   background-color: #92b5b0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 #logo { height: 1.5em; margin-right: 0.5rem; vertical-align: middle; }
 h1,h2 { margin: 0 }
