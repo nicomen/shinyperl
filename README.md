@@ -1,8 +1,8 @@
 ## CONTRIBUTING ##
 
-If you think something is wrong, plase file an issue.
+If you think something is wrong, please file an issue.
 
-If you want to add a snippet of shiny perl add a pull request with an addition in the snippets/ directory.
+If you want to add a snippet of shiny perl add a pull request with an addition in the `snippets` directory.
 
 ### Snippet format ###
 
@@ -10,7 +10,7 @@ The intention is that any file in the snippet should be able to execute and be v
 
 The format is basically:
 
-```
+```perl
 #!/usr/bin/env perl # [% title = 'Title of snippet'; BLOCK code %]
 
 … Valid Perl code …
