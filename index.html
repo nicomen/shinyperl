@@ -66,8 +66,8 @@ package Point;
 
 use Moo;
 
-has 'x' => is => 'rw', isa => sub { m{\A\d+\z} };
-has 'y' => is => 'rw', isa => sub { m{\A\d+\z} };
+has 'x' => is => 'rw';
+has 'y' => is => 'rw';
 
 sub describe {
   my ($self) = @_;
