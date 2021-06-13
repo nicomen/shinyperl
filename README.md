@@ -1,5 +1,11 @@
 # Perl is shiny!
 
+## DESCRIPTION ##
+
+This is the source repository for https://shinyperl.com.
+
+A website to showcase nice and small examples of Perl code that do simple things.
+
 ## CONTRIBUTING ##
 
 If you think something is wrong, please file an issue.
