@@ -1,3 +1,5 @@
+# Perl is shiny!
+
 ## DESCRIPTION ##
 
 This is the source repository for https://shinyperl.com.
