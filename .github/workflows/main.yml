@@ -31,6 +31,14 @@ jobs:
           # List of modules or distributions to install [seperated by newline]
           install: Template::Toolkit
     
-    # Runs a single command using the runners shell
       - name: Run a one-line script
         run: ./build.sh
+
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
