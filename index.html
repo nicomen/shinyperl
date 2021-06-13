@@ -1,0 +1,112 @@
+<html charset="UTF-8">
+<head>
+  <title>Perl is shiny!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="icon" type="image/svg+xml" href="perl.svg">
+  <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.4/tailwind.min.css" integrity="sha512-paVHVRRhdoOu1nOXKnqDC1Vka0nh7FAmU3nsM4n2FKxOQTeF6crMdMfkVvEsuaOXZ6oEAVL5+wLbQcule/Xdag==" crossorigin="anonymous" referrerpolicy="no-referrer" /-->
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+
+  <link rel="stylesheet"
+       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/stackoverflow-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<h1><img src="perl.svg" id="logo">Perl is shiny</h1>
+<span>Have fun with perl!</span>
+<div id="slideshow">  <div>
+    <div class="slide"><h2>Easy interaction with CSV</h2>
+      <pre><code>
+use Text::CSV_XS qw( csv );
+
+# Read whole file in memory
+my $aoa = csv (in => "data.csv");    # as array of array
+my $aoh = csv (in => "data.csv",
+               headers => "auto");   # as array of hash
+
+# Write array of arrays as csv file
+csv (in => $aoa, out => "file.csv", sep_char=> ";");
+
+# Only show lines where "code" is odd
+csv (in => "data.csv", filter => { code => sub { $_ % 2 }});
+
+</code></pre>
+    </div>
+  </div>  <div>
+    <div class="slide"><h2>Fetch a random quote</h2>
+      <pre><code>
+use Mojo::UserAgent;
+
+my $agent = Mojo::UserAgent->new;
+
+my $tx = $agent->get("http://www.quotationspage.com/random.php");
+
+my $quote  = $tx->res->dom->at("dt");
+my $author = $quote->next->at("b");
+
+print join " &mdash; ", ($quote->all_text, $author->all_text);
+# Perl is shiny &mdash; Perl Hacker
+
+</code></pre>
+    </div>
+  </div>  <div>
+    <div class="slide"><h2>Objects with Moo</h2>
+      <pre><code>
+package Point;
+
+use Moo;
+
+has 'x' => is => 'rw';
+has 'y' => is => 'rw';
+
+sub describe {
+  my ($self) = @_;
+
+  printf "A point at (%d,%d)", $self->x, $self->y;
+}
+
+Point->new( x => 4, y => 2 )->describe; # A point at (4,2)
+
+</code></pre>
+    </div>
+  </div>  <div>
+    <div class="slide"><h2>Objects with Object::Pad</h2>
+      <pre><code>
+use Object::Pad;
+
+class Point {
+   has $x = 0;
+   has $y = 0;
+
+   BUILD {
+     ($x, $y) = @_;
+   }
+
+   method move ($dX, $dY) {
+      $x += $dX;
+      $y += $dY;
+   }
+
+   method describe {
+      print "A point at ($x,$y)";
+   }
+}
+
+Point->new(5,10)->describe; # A point at (5,10)
+
+</code></pre>
+    </div>
+  </div></div>
+<div id="footer">Want to see more shiny perl code here? Add a pull request at <a href="https://github.com/nicomen/shinyperl">https://github.com/nicomen/shinyperl</a></div>
+</body>
+</html>
