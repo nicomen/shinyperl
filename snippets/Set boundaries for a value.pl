@@ -4,11 +4,16 @@ use v5.10;
 
 my ($min, $max) = (1,100);
 
-my @input_values = (-10,10,200);
+my @inputs = (-10,10,200);
 
-say ((sort { $a <=> $b } ($min, $max, $_))[1]) for @input_values;
-# 1
-# 10
-# 100
+for my $i (@inputs) {
+  my $value = (sort { $a <=> $b } ($min, $max, $i))[1];
+
+  say "$value is within ($min,$max)";
+}
+
+# 1 is within (1,100)
+# 10 is within (1,100)
+# 100 is within (1,100)
 
 #! [% END %]
