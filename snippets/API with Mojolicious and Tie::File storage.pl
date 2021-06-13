@@ -6,15 +6,13 @@ use Tie::File;
 tie my @todos, 'Tie::File', 'todos'
     or die 'could not open storage';
 
-# list of todos
-# curl localhost:3000
-get '/' => sub ($c) {
+# curl localhost:3000/list
+get '/list' => sub ($c) {
     $c->render(json => \@todos);
 };
 
-# add a new todo note
-# curl --request POST localhost:3000 --data 'walk my dog'
-post '/' => sub ($c) {
+# curl --request POST localhost:3000/add --data 'walk my dog'
+post '/add' => sub ($c) {
     push @todos, $c->req->body;
     $c->rendered(204); # no content
 };
