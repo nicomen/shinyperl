@@ -86,11 +86,11 @@
     <rect
        style="fill:#020202;fill-opacity:1;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
        id="rect833"
-       width="72.181061"
-       height="72.181061"
-       x="79.99456"
-       y="57.20298"
-       ry="36.09053" />
+       width="70.230049"
+       height="70.99939"
+       x="80.97007"
+       y="57.793816"
+       ry="35.499695" />
     <rect
        style="fill:#fefefe;fill-opacity:1;stroke-width:4.16045;stroke-linecap:round;stroke-linejoin:round"
        id="rect835"
@@ -101,9 +101,17 @@
        ry="38.454575"
        clip-path="url(#clipPath863)"
        transform="matrix(0.9614367,0,0,0.9614367,4.476624,3.5977056)" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;fill-opacity:1"
+       id="rect844"
+       width="79.939682"
+       height="79.939682"
+       x="76.115242"
+       y="53.323666"
+       ry="39.969841" />
     <path
        sodipodi:type="star"
-       style="fill:#2b2b2b;stroke:#ffffff;stroke-width:6.80418;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#010101;stroke:#ffffff;stroke-width:6.80418;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
        id="path843"
        sodipodi:sides="4"
        sodipodi:cx="-4.4329414"
@@ -117,13 +125,5 @@
        inkscape:randomized="0"
        d="M 49.234137,32.381673 C 51.763446,36.343725 15.232349,66.168593 14.219246,70.758678 13.206144,75.348764 33.789291,117.77962 29.827239,120.30893 25.865187,122.83824 -3.9596807,86.307143 -8.5497662,85.294041 -13.139852,84.280938 -55.570711,104.86409 -58.10002,100.90203 -60.629329,96.939982 -24.098231,67.115114 -23.085129,62.525029 -22.072027,57.934943 -42.655174,15.504084 -38.693122,12.974775 -34.73107,10.445466 -4.9062022,46.976563 -0.3161167,47.989666 4.2739688,49.002768 46.704828,28.419621 49.234137,32.381673 Z"
        transform="matrix(0.29204445,-0.03330251,0.03330251,0.29204445,95.578001,50.768307)" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;fill-opacity:1"
-       id="rect844"
-       width="79.939682"
-       height="79.939682"
-       x="76.115242"
-       y="53.323666"
-       ry="39.969841" />
   </g>
 </svg>
