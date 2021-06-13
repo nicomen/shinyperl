@@ -1,3 +1,5 @@
+# Perl is shiny!
+
 ## CONTRIBUTING ##
 
 If you think something is wrong, please file an issue.
