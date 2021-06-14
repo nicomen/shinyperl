@@ -13,12 +13,13 @@ body {
   background-color: #92b5b0;
   overflow-x: hidden;
 }
-#logo { height: 1.5em; margin-right: 0.5rem; vertical-align: middle; }
+#logo { height: 1.5em; width: 1.5em; margin-right: 0.5rem; vertical-align: middle; }
 h1,h2 { margin: 0 }
 h1 { display: inline; margin-right: 1rem; }
 div#footer { margin: auto; margin-top: 4rem; text-align: center; }
 
-.slick-slide { padding: 1rem; text-align: center; height: auto; } 
+#slideshow { text-align: center; }
+.slick-slide { padding: 1rem; height: auto; }
 .slide { display: inline-block; }
 
 pre { white-space: pre-wrap; user-select: text; text-align: left; }
