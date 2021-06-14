@@ -38,6 +38,9 @@
   </div>
 [% END %]
 </div>
-<div id="footer">Want to see more shiny perl code here? Add a pull request at <a href="https://github.com/nicomen/shinyperl">https://github.com/nicomen/shinyperl</a></div>
+<div id="footer">
+<p>Want to see more shiny perl code here? <a href="https://github.com/nicomen/shinyperl">Add a pull request</a></p>
+<p>Want to lean perl? <a href="https://learn.perl.org">https://learn.perl.org</a></p>
+</div>
 </body>
 </html>
