@@ -9,19 +9,30 @@ my $window_handle = $firefox->new_window(type => 'tab', focus => 1);
 $firefox->switch_to_window($window_handle);
 $firefox->go('https://metacpan.org/');
 
-# Get the page source of the content document
-# print $firefox->html();
+# Returns the first element with a matching 'class' property (search textbox)
+my $element = $firefox->find_class('form-control home-search-input');
 
-# returns the first element with a matching 'class' property
-# $firefox->find_class('container-fluid')->find_id('search-input')->type('Test::More');
+# Remove if there is something already filled there
+$firefox->clear($element);
 
-# Take the screnshot and return the PNG file
+# Fill it with search element e.g. Mojolicious
+$firefox->type($element, "Mojolicious");
+
+# Find search button by the given id and click it
+$firefox->find_class('btn search-btn')->click();
+
+# Take the screnshot, return the PNG file and save it locally
+# This will take screenshot of the whole document
 # my $file_handle = $firefox->selfie();
 
-# Returns the first element that matches this expression and sens a 'click' to it
-# $firefox->find('//button[@name="lucky"]')->click();
+# This will only taken screenshot of the element specified
+my $file_handle = $firefox->selfie($firefox->find_class('content search-results'));
 
-# Just to see it in action with human eyes
-sleep 5;
+open(my $screenshot, '>', "firefox_output_screen.png") or die "Unable to open file: $!";
+binmode($screenshot);
+while (my $line = <$file_handle>) {
+    print $screenshot $line;
+}
+close($screenshot);
 
 #! [% END %]
