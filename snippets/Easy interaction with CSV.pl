@@ -3,9 +3,9 @@
 use Text::CSV_XS qw( csv );
 
 # Read whole file in memory
-my $aoa = csv (in => "data.csv");    # as array of array
+my $aoa = csv (in => "data.csv");  # as array of array
 my $aoh = csv (in => "data.csv",
-               headers => "auto");   # as array of hash
+               headers => "auto"); # as array of hash
 
 # Write array of arrays as csv file
 csv (in => $aoa, out => "file.csv", sep_char=> ";");
