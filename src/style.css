@@ -1,6 +1,6 @@
 @media only screen and (max-width: 600px) {
   body {
-    font-size: 75%;
+    font-size: 1.5vh;
     margin: 0.5rem !important;
   }
 }
@@ -24,6 +24,7 @@ pre.prettyprint {
   display: inline-block; 
   margin: auto;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  border-radius: 6px;
 }
 
 .slick-prev { left: 2%; z-index: 1000; }
