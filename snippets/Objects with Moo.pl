@@ -13,6 +13,7 @@ sub describe {
   printf "A point at (%d,%d)", $self->x, $self->y;
 }
 
-Point->new( x => 4, y => 2 )->describe; # A point at (4,2)
+Point->new( x => 4, y => 2 )->describe;
+# A point at (4,2)
 
 #! [% END %]
