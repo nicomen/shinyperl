@@ -10,10 +10,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 
-  <link rel="stylesheet"
-       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/stackoverflow-dark.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
-
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -25,13 +21,19 @@
 <h1><img src="perl.svg" id="logo">Perl is shiny</h1>
 <span>Have fun with perl!</span>
 <div id="slideshow">
+[% PERL %]
+  use PPI::Prettify;
+  $context->define_filter('prettify', sub {
+    PPI::Prettify::prettify({ code => shift });
+  });
+[% END  %]
 [% USE dir = Directory('snippets') %]
 [% FOR snippet IN dir.files %]
 [%   title = snippet.name.replace("\.pl$", ""); %]
 [%   PROCESS $snippet.path | replace('#!.*', '') %]
   <div>
     <div class="slide"><h2>[% title %]</h2>
-      <pre><code>[% PROCESS code | replace('#!.*', '') %]</code></pre>
+      [% PROCESS code | replace('#!.*', '') | prettify %]
     </div>
   </div>
 [% END %]

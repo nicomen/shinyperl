@@ -1,6 +1,6 @@
 $( document ).ready(function() {
   $('#slideshow').slick({
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     dots: true,
     infinite: true,
@@ -10,6 +10,4 @@ $( document ).ready(function() {
     slidesToShow: 1,
     focusOnSelect: true,
   });
-
-  hljs.highlightAll();
 });

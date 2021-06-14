@@ -29,7 +29,9 @@ jobs:
         uses: perl-actions/install-with-cpanm@v1.1
         with:
           # List of modules or distributions to install [seperated by newline]
-          install: Template::Toolkit
+          install: |
+            Template::Toolkit
+            PPI::Prettify
     
       - name: Run a one-line script
         run: ./build.sh
