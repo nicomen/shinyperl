@@ -20,6 +20,7 @@ class Point {
   }
 }
 
-Point->new(5,10)->describe; # A point at (5,10)
+Point->new(5,10)->describe;
+# A point at (5,10)
 
 #! [% END %]

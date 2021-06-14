@@ -1,4 +1,4 @@
-#!/usr/bin/env perl -W # [% title = 'Scrape a random quote from a web page'; BLOCK code %]
+#!/usr/bin/env perl -W # [% title = 'Scrape a random quote'; BLOCK code %]
 
 use Mojo::UserAgent;
 

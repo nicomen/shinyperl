@@ -1,6 +1,6 @@
 $( document ).ready(function() {
   $('#slideshow').slick({
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 5000,
     dots: true,
     infinite: true,
