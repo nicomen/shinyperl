@@ -29,6 +29,8 @@ pre.prettyprint {
   margin: auto;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
   border-radius: 6px;
+  min-width: 30em;
+  max-width: 90%;
 }
 
 .slick-prev { left: 2%; z-index: 1000; }
