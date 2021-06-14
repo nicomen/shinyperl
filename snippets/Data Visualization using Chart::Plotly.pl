@@ -8,16 +8,11 @@ use Chart::Plotly::Image 'save_image';
 use Chart::Plotly::Plot;
 use Chart::Plotly::Trace::Scatter;
 
-my %domainAxis = ("data" => ["2021-04-15", "2021-04-16", "2021-04-17", "2021-04-18"], "label" => "Date");
-my %rangeAxis  = ("data" => [10, 3, 5, 9], "legendName" => "Automobiles Sold");
+my @domainAxis = ("2021-04-15", "2021-04-16", "2021-04-17", "2021-04-18");
+my @rangeAxis  = (10, 3, 5, 9);
 
 my $plot    = Chart::Plotly::Plot->new();
-# For multi-line chart create it in loop
-my $scatter = Chart::Plotly::Trace::Scatter->new(
-    x    => $domainAxis{data},
-    y    => $rangeAxis{data},
-    name => $rangeAxis{legendName}
-);
+my $scatter = Chart::Plotly::Trace::Scatter->new(x => \@domainAxis, y => \@rangeAxis);
 $plot->add_trace($scatter);
 
 # Opens the plot in a browser locally
