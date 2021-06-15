@@ -19,13 +19,14 @@ $firefox->type($e, "Mojolicious");
 # Find search button by the given id and click it
 $firefox->find_class('btn search-btn')->click();
 
-# Take screnshot of entire document
-print $firefox->selfie()->filename;
+# Take screenshot of entire document
+my $fh = $firefox->selfie()->filename;
+print $fh->filename;
 # /tmp/full_screenshot.png
 
 # This will only take screenshot of the element specified
 my $fh = $firefox->selfie($firefox->find_class('content search-results'));
 print $fh->filename;
-# /tmp/full_screenshot.png
+# /tmp/partial_screenshot.png
 
 #! [% END %]
