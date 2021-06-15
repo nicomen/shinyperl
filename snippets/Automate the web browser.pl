@@ -6,7 +6,7 @@ my $firefox = Firefox::Marionette->new(visible => 1);
 my $window  = $firefox->new_window(type => 'tab', focus => 1);
 $firefox->switch_to_window($window);
 
-# Return first element with a matching 'class' property (search textbox)
+# Return first element matching a class (search textbox)
 my $e = $firefox->go('https://metacpan.org/')
                 ->find_class('form-control home-search-input')
 
