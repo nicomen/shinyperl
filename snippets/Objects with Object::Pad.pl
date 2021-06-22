@@ -1,26 +1,24 @@
-#!/usr/bin/perl -W # [% title = 'Objects with Object::Pad'; BLOCK code %]
+#!/usr/bin/perl # [% title = 'Objects with Object::Pad'; BLOCK code %]
 
-use Object::Pad;
+use Object::Pad 0.41;
 
 class Point {
-  has $x = 0;
-  has $y = 0;
+   has $x :param = 0;
+   has $y :param = 0;
+   has $z = 0;
 
-  BUILD {
-    ($x, $y) = @_;
-  }
+   method move ($dX=0, $dY=0, $dZ=0) {
+      $x += $dX;
+      $y += $dY;
+      $z += $dZ;
+      return $self;
+   }
 
-  method move ($dX, $dY) {
-    $x += $dX;
-    $y += $dY;
-  }
-
-  method describe {
-    print "A point at ($x,$y)";
-  }
+   method describe {
+      print "A point at ($x, $y, $z)\n";
+   }
 }
 
-Point->new(5,10)->describe;
-# A point at (5,10)
-
+Point->new(x => 5, y => 10)->move(1,1)->describe;
+# A point at (6, 11, 0)
 #! [% END %]
