@@ -1,0 +1,85 @@
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 1.5vh;
+    margin: 0.5rem !important;
+  }
+  pre.prettyprint {
+    font-size: 1vh;
+  }
+}
+body {
+  font-family: 'Baloo Tammudu 2', cursive;
+  margin: 2rem;
+  background-color: #92b5b0;
+  overflow-x: hidden;
+}
+#logo { height: 1.5em; width: 1.5em; margin-right: 0.5rem; vertical-align: middle; }
+h1,h2 { margin: 0 }
+h1 { display: inline; margin-right: 1rem; }
+div#footer { margin: auto; margin-top: 4rem; text-align: center; }
+
+#slideshow { text-align: center; }
+.slick-slide { padding: 1rem; height: auto; }
+.slide { display: inline-block; }
+
+pre { white-space: pre-wrap; user-select: text; text-align: left; }
+pre.prettyprint {
+  padding: 1rem;
+  display: inline-block; 
+  margin: auto;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  min-width: 30em;
+  max-width: 90%;
+}
+
+.slick-prev { left: 2%; z-index: 1000; }
+.slick-next { right: 2%; }
+.slick-prev:before,
+.slick-next:before {
+  color: #ffffff !important;
+}
+@media only screen and (min-width: 600px) {
+  .slick-next, .slick-prev { width: 5%; width: 5%; font-size: 10rem; }
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 4rem;
+  }
+}
+
+/* syntax copied from https://github.com/googlearchive/code-prettify/blob/master/styles/desert.css */
+
+pre.prettyprint { display: block; background-color: #222 }
+pre .nocode { background-color: none; color: #000 }
+pre .str {color: #f5d86a;} /* string  - pink */
+pre .kwd {color: #b52775;font-weight: bold;}
+pre .com {color: #636363;} /* comment - skyblue */
+pre .typ {color: #61af61;} /* type    - lightgreen */
+pre .var {color: #3cb3ad;} /* type    - lightgreen */
+pre .lit {color: #d47f56;} /* literal - darkred */
+pre .pun {color: #cecece;}    /* punctuation */
+pre .pln {color: #1a789e;}    /* plaintext */
+pre .tag { color: #f0e68c; font-weight: bold } /* html/xml tag    - lightyellow */
+pre .atn { color: #bdb76b; font-weight: bold } /* attribute name  - khaki */
+pre .atv { color: #b3aae4 } /* attribute value - pink */
+pre .dec { color: #42a742 } /* decimal         - lightgreen */
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0; color: #AEAEAE } /* IE indents via margin-left */
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
+/* Alternate shading for lines */
+li.L1,li.L3,li.L5,li.L7,li.L9 { }
+
+@media print {
+  pre.prettyprint { background-color: none }
+  pre .str, code .str { color: #060 }
+  pre .kwd, code .kwd { color: #006; font-weight: bold }
+  pre .com, code .com { color: #600; font-style: italic }
+  pre .typ, code .typ { color: #404; font-weight: bold }
+  pre .lit, code .lit { color: #044 }
+  pre .pun, code .pun { color: #440 }
+  pre .pln, code .pln { color: #000 }
+  pre .tag, code .tag { color: #006; font-weight: bold }
+  pre .atn, code .atn { color: #404 }
+  pre .atv, code .atv { color: #060 }
+}
