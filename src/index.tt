@@ -33,7 +33,7 @@
 [%   PROCESS $snippet.path | replace('#!.*', '') %]
   <div>
     <div class="slide"><h2>[% title %]</h2>
-      [% PROCESS code | replace('#!.*', '') | prettify %]
+      [% PROCESS code | replace('\s*#!.*', '') | prettify %]
     </div>
   </div>
 [% END %]
