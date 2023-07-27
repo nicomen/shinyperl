@@ -1,0 +1,229 @@
+<html charset="UTF-8">
+<head>
+  <title>Perl is shiny!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="icon" type="image/svg+xml" href="perl.svg">
+  <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.4/tailwind.min.css" integrity="sha512-paVHVRRhdoOu1nOXKnqDC1Vka0nh7FAmU3nsM4n2FKxOQTeF6crMdMfkVvEsuaOXZ6oEAVL5+wLbQcule/Xdag==" crossorigin="anonymous" referrerpolicy="no-referrer" /-->
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<h1><img src="perl.svg" id="logo">Perl is shiny</h1>
+<span>Have fun with perl!</span>
+<div id="slideshow">  <div>
+    <div class="slide"><h2>API with Mojolicious and Tie::File storage</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="pln">Mojolicious::Lite</span><span class="pln"> </span><span class="pln">-signatures</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">use</span><span class="pln"> </span><span class="pln">Tie::File</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">tie</span><span class="pln"> </span><span class="kwd">my</span><span class="pln"> </span><span class="typ">@todos</span><span class="pun">,</span><span class="pln"> </span><span class="str">&#39;Tie::File&#39;</span><span class="pun">,</span><span class="pln"> </span><span class="str">&#39;todos&#39;</span><span class="pln">
+</span><span class="pln">    </span><span class="pun">or</span><span class="pln"> </span><span class="kwd">die</span><span class="pln"> </span><span class="str">&#39;could not open storage&#39;</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># curl localhost:3000/list
+</span><span class="pln">get</span><span class="pln"> </span><span class="str">&#39;/list&#39;</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">sub</span><span class="pln"> </span><span class="var">($c)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">    </span><span class="typ">$c</span><span class="pun">-&gt;</span><span class="typ">render</span><span class="pun">(</span><span class="str">json</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="var">\</span><span class="typ">@todos</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># curl --request POST localhost:3000/add --data &#39;walk my dog&#39;
+</span><span class="pln">post</span><span class="pln"> </span><span class="str">&#39;/add&#39;</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">sub</span><span class="pln"> </span><span class="var">($c)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">    </span><span class="kwd">push</span><span class="pln"> </span><span class="typ">@todos</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$c</span><span class="pun">-&gt;</span><span class="typ">req</span><span class="pun">-&gt;</span><span class="typ">body</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">    </span><span class="typ">$c</span><span class="pun">-&gt;</span><span class="typ">rendered</span><span class="pun">(</span><span class="atv">204</span><span class="pun">)</span><span class="pun">;</span><span class="pln"> </span><span class="com"># no content</span><span class="pln">
+</span><span class="pun">}</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="pln">app</span><span class="pun">-&gt;</span><span class="typ">start</span><span class="pun">;</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Automate Windows GUI - Win32::GuiTest</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="pln">File::Basename</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">use</span><span class="pln"> </span><span class="pln">Win32::GuiTest</span><span class="pln"> </span><span class="str">qw( WaitWindow FindWindowLike SetForegroundWindow SendKeys MenuSelect GetSystemMenu )</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$input_dir</span><span class="pln">        </span><span class="pun">=</span><span class="pln"> </span><span class="str">&quot;C:\\Program Files\\Notepad++&quot;</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$filename_to_open</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">&quot;readme.txt&quot;</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Open the given dir in windows explorer and wait for it to open (timeout - 5sec)
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$status_code</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">system</span><span class="pun">(</span><span class="str">&quot;C:\\Windows\\explorer.exe&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$input_dir</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">WaitWindow</span><span class="pun">(</span><span class="pln">basename</span><span class="pun">(</span><span class="typ">$input_dir</span><span class="pun">)</span><span class="pun">,</span><span class="pln"> </span><span class="atv">5</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Search for that file explorer window and bring it to front
+</span><span class="kwd">my</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$exp_window</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pln">FindWindowLike</span><span class="pun">(</span><span class="atv">0</span><span class="pun">,</span><span class="pln"> </span><span class="pln">basename</span><span class="pun">(</span><span class="typ">$input_dir</span><span class="pun">)</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">SetForegroundWindow</span><span class="pun">(</span><span class="typ">$exp_window</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Keys to be pressed on keyboard in sequential order
+</span><span class="kwd">foreach</span><span class="pln"> </span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$key</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$filename_to_open</span><span class="pun">,</span><span class="pln"> </span><span class="str">&quot;{APP}&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="str">&quot;N&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="str">&quot;{ENTER}&quot;</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">    </span><span class="pln">SendKeys</span><span class="pun">(</span><span class="typ">$key</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pln">WaitWindow</span><span class="pun">(</span><span class="pln">basename</span><span class="pun">(</span><span class="typ">$filename_to_open</span><span class="pun">)</span><span class="pun">,</span><span class="pln"> </span><span class="atv">5</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Search for Notepad++ app window
+</span><span class="kwd">my</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$notepad_win</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pln">FindWindowLike</span><span class="pun">(</span><span class="atv">0</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$filename_to_open</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">SetForegroundWindow</span><span class="pun">(</span><span class="typ">$notepad_win</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Close the Notepad++ window
+</span><span class="pln">MenuSelect</span><span class="pun">(</span><span class="str">&quot;&amp;Close&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="atv">0</span><span class="pun">,</span><span class="pln"> </span><span class="pln">GetSystemMenu</span><span class="pun">(</span><span class="typ">$notepad_win</span><span class="pun">,</span><span class="pln"> </span><span class="atv">0</span><span class="pun">)</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">WaitWindow</span><span class="pun">(</span><span class="pln">basename</span><span class="pun">(</span><span class="typ">$input_dir</span><span class="pun">)</span><span class="pun">,</span><span class="pln"> </span><span class="atv">5</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Close the file explorer window
+</span><span class="pln">SendKeys</span><span class="pun">(</span><span class="str">&quot;^w&quot;</span><span class="pun">)</span><span class="pun">;</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Automate the web browser (e.g. Firefox)</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="pln">Firefox::Marionette</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$firefox</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pln">Firefox::Marionette</span><span class="pun">-&gt;</span><span class="typ">new</span><span class="pun">(</span><span class="str">visible</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="atv">1</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$window</span><span class="pln">  </span><span class="pun">=</span><span class="pln"> </span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">new_window</span><span class="pun">(</span><span class="str">type</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&#39;tab&#39;</span><span class="pun">,</span><span class="pln"> </span><span class="str">focus</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="atv">1</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">switch_to_window</span><span class="pun">(</span><span class="typ">$window</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Return first element matching a class (search textbox)
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$e</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">go</span><span class="pun">(</span><span class="str">&#39;https://metacpan.org/&#39;</span><span class="pun">)</span><span class="pln">
+</span><span class="pln">                </span><span class="pun">-&gt;</span><span class="typ">find_class</span><span class="pun">(</span><span class="str">&#39;form-control home-search-input&#39;</span><span class="pun">)</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Remove if there is something already filled there
+</span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">clear</span><span class="pun">(</span><span class="typ">$e</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Fill it with search element e.g. Mojolicious
+</span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">type</span><span class="pun">(</span><span class="typ">$e</span><span class="pun">,</span><span class="pln"> </span><span class="str">&quot;Mojolicious&quot;</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Find search button by the given id and click it
+</span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">find_class</span><span class="pun">(</span><span class="str">&#39;btn search-btn&#39;</span><span class="pun">)</span><span class="pun">-&gt;</span><span class="typ">click</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Take screenshot of entire document
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$fh</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">selfie</span><span class="pun">(</span><span class="pun">)</span><span class="pun">-&gt;</span><span class="typ">filename</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> </span><span class="typ">$fh</span><span class="pun">-&gt;</span><span class="typ">filename</span><span class="pun">;</span><span class="pln">
+</span><span class="com"># /tmp/full_screenshot.png
+</span><span class="pln">
+</span><span class="com"># This will only take screenshot of the element specified
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$fh</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">selfie</span><span class="pun">(</span><span class="typ">$firefox</span><span class="pun">-&gt;</span><span class="typ">find_class</span><span class="pun">(</span><span class="str">&#39;content search-results&#39;</span><span class="pun">)</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> </span><span class="typ">$fh</span><span class="pun">-&gt;</span><span class="typ">filename</span><span class="pun">;</span><span class="pln">
+</span><span class="com"># /tmp/partial_screenshot.png</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Clamping a value</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="atv">v5.36</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$min</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$max</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="atv">1</span><span class="pun">,</span><span class="atv">100</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">@inputs</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="atv">-10</span><span class="pun">,</span><span class="atv">10</span><span class="pun">,</span><span class="atv">200</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">for</span><span class="pln"> </span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$i</span><span class="pln"> </span><span class="pun">(</span><span class="typ">@inputs</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">  </span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$value</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pln">clamp</span><span class="pun">(</span><span class="typ">$i</span><span class="pun">,</span><span class="typ">$min</span><span class="pun">,</span><span class="typ">$max</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">  </span><span class="kwd">say</span><span class="pln"> </span><span class="str">&quot;$i set to $value to be within ($min,$max)&quot;</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pln">
+</span><span class="lit">sub</span><span class="pln"> </span><span class="typ">clamp</span><span class="pln"> </span><span class="var">($i,$min,$max)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">  </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">sort</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">$a</span><span class="pln"> </span><span class="pun">&lt;=&gt;</span><span class="pln"> </span><span class="typ">$b</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$i</span><span class="pun">,</span><span class="typ">$min</span><span class="pun">,</span><span class="typ">$max</span><span class="pun">)</span><span class="pun">)</span><span class="pun">[</span><span class="atv">1</span><span class="pun">]</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># -10 set to 1 to be within (1,100)
+</span><span class="com"># 10 set to 10 to be within (1,100)
+</span><span class="com"># 200 set to 100 to be within (1,100)</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Data Visualization using Chart::Plotly - Line chart</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="kwd">strict</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">use</span><span class="pln"> </span><span class="kwd">warnings</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">use</span><span class="pln"> </span><span class="pln">Chart::Plotly</span><span class="pln"> </span><span class="str">&#39;show_plot&#39;</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">use</span><span class="pln"> </span><span class="pln">Chart::Plotly::Image</span><span class="pln"> </span><span class="str">&#39;save_image&#39;</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">use</span><span class="pln"> </span><span class="pln">Chart::Plotly::Plot</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">use</span><span class="pln"> </span><span class="pln">Chart::Plotly::Trace::Scatter</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">@domainAxis</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="str">&quot;2021-04-15&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="str">&quot;2021-04-16&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="str">&quot;2021-04-17&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="str">&quot;2021-04-18&quot;</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">@rangeAxis</span><span class="pln">  </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="atv">10</span><span class="pun">,</span><span class="pln"> </span><span class="atv">3</span><span class="pun">,</span><span class="pln"> </span><span class="atv">5</span><span class="pun">,</span><span class="pln"> </span><span class="atv">9</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$plot</span><span class="pln">    </span><span class="pun">=</span><span class="pln"> </span><span class="pln">Chart::Plotly::Plot</span><span class="pun">-&gt;</span><span class="typ">new</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$scatter</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pln">Chart::Plotly::Trace::Scatter</span><span class="pun">-&gt;</span><span class="typ">new</span><span class="pun">(</span><span class="str">x</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="var">\</span><span class="typ">@domainAxis</span><span class="pun">,</span><span class="pln"> </span><span class="str">y</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="var">\</span><span class="typ">@rangeAxis</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="typ">$plot</span><span class="pun">-&gt;</span><span class="typ">add_trace</span><span class="pun">(</span><span class="typ">$scatter</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Opens the plot in a browser locally
+</span><span class="pln">show_plot</span><span class="pun">(</span><span class="typ">$plot</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Save the generated image locally
+</span><span class="pln">save_image</span><span class="pun">(</span><span class="pln">
+</span><span class="pln">    </span><span class="str">file</span><span class="pln">   </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&quot;lineChart.png&quot;</span><span class="pun">,</span><span class="pln">    </span><span class="com"># Referring to a local filesystem path</span><span class="pln">
+</span><span class="pln">    </span><span class="str">plot</span><span class="pln">   </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="typ">$plot</span><span class="pun">,</span><span class="pln">
+</span><span class="pln">    </span><span class="str">width</span><span class="pln">  </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="atv">1024</span><span class="pun">,</span><span class="pln">               </span><span class="com"># Sets the image width</span><span class="pln">
+</span><span class="pln">    </span><span class="str">height</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="atv">768</span><span class="pun">,</span><span class="pln">                </span><span class="com"># Sets the image height</span><span class="pln">
+</span><span class="pln">    </span><span class="str">engine</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&#39;auto&#39;</span><span class="pln">
+</span><span class="pun">)</span><span class="pun">;</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Easy interaction with CSV</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="pln">Text::CSV_XS</span><span class="pln"> </span><span class="str">qw( csv )</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Read whole file in memory
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$aoa</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pln">csv</span><span class="pln"> </span><span class="pun">(</span><span class="str">in</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&quot;data.csv&quot;</span><span class="pun">)</span><span class="pun">;</span><span class="pln">  </span><span class="com"># as array of array</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$aoh</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pln">csv</span><span class="pln"> </span><span class="pun">(</span><span class="str">in</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&quot;data.csv&quot;</span><span class="pun">,</span><span class="pln">
+</span><span class="pln">               </span><span class="str">headers</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&quot;auto&quot;</span><span class="pun">)</span><span class="pun">;</span><span class="pln"> </span><span class="com"># as array of hash</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Write array of arrays as csv file
+</span><span class="pln">csv</span><span class="pln"> </span><span class="pun">(</span><span class="str">in</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="typ">$aoa</span><span class="pun">,</span><span class="pln"> </span><span class="str">out</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&quot;file.csv&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="str">sep_char</span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&quot;;&quot;</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="com"># Only show lines where &quot;code&quot; is odd
+</span><span class="pln">csv</span><span class="pln"> </span><span class="pun">(</span><span class="str">in</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&quot;data.csv&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="str">filter</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="str">code</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">sub</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">$_</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> </span><span class="atv">2</span><span class="pln"> </span><span class="pun">}</span><span class="pun">}</span><span class="pun">)</span><span class="pun">;</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Scrape a random quote</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="pln">Mojo::UserAgent</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$agent</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pln">Mojo::UserAgent</span><span class="pun">-&gt;</span><span class="typ">new</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$tx</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">$agent</span><span class="pun">-&gt;</span><span class="typ">get</span><span class="pun">(</span><span class="str">&quot;http://www.quotationspage.com/random.php&quot;</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$quote</span><span class="pln">  </span><span class="pun">=</span><span class="pln"> </span><span class="typ">$tx</span><span class="pun">-&gt;</span><span class="typ">res</span><span class="pun">-&gt;</span><span class="typ">dom</span><span class="pun">-&gt;</span><span class="typ">at</span><span class="pun">(</span><span class="str">&quot;dt&quot;</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">my</span><span class="pln"> </span><span class="typ">$author</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">$quote</span><span class="pun">-&gt;</span><span class="typ">next</span><span class="pun">-&gt;</span><span class="typ">at</span><span class="pun">(</span><span class="str">&quot;b&quot;</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> </span><span class="kwd">join</span><span class="pln"> </span><span class="str">&quot; &amp;mdash; &quot;</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$quote</span><span class="pun">-&gt;</span><span class="typ">all_text</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$author</span><span class="pun">-&gt;</span><span class="typ">all_text</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="com"># Perl is shiny &amp;mdash; Perl Hacker</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Objects with Moo</h2><pre class="prettyprint"><span class="lit">package</span><span class="pln"> </span><span class="atn">Point</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="kwd">use</span><span class="pln"> </span><span class="pln">Moo</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="pln">has</span><span class="pln"> </span><span class="str">&#39;x&#39;</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">is</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&#39;rw&#39;</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">has</span><span class="pln"> </span><span class="str">&#39;y&#39;</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">is</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">&#39;rw&#39;</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="lit">sub</span><span class="pln"> </span><span class="typ">describe</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">  </span><span class="kwd">my</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$self</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">@_</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+  </span><span class="kwd">printf</span><span class="pln"> </span><span class="str">&quot;A point at (%d,%d)&quot;</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$self</span><span class="pun">-&gt;</span><span class="typ">x</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$self</span><span class="pun">-&gt;</span><span class="typ">y</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pln">
+</span><span class="pln">Point</span><span class="pun">-&gt;</span><span class="typ">new</span><span class="pun">(</span><span class="pln"> </span><span class="str">x</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="atv">4</span><span class="pun">,</span><span class="pln"> </span><span class="str">y</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="atv">2</span><span class="pln"> </span><span class="pun">)</span><span class="pun">-&gt;</span><span class="typ">describe</span><span class="pun">;</span><span class="pln">
+</span><span class="com"># A point at (4,2)</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Objects with Object::Pad</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="pln">Object::Pad</span><span class="pln"> </span><span class="atv">0.41</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+</span><span class="pln">class</span><span class="pln"> </span><span class="pln">Point</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">   </span><span class="pln">has</span><span class="pln"> </span><span class="typ">$x</span><span class="pln"> </span><span class="pun">:</span><span class="pln">param</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="atv">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">   </span><span class="pln">has</span><span class="pln"> </span><span class="typ">$y</span><span class="pln"> </span><span class="pun">:</span><span class="pln">param</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="atv">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">   </span><span class="pln">has</span><span class="pln"> </span><span class="typ">$z</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="atv">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">
+   </span><span class="pln">method</span><span class="pln"> </span><span class="pln">move</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$dX</span><span class="pun">=</span><span class="atv">0</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$dY</span><span class="pun">=</span><span class="atv">0</span><span class="pun">,</span><span class="pln"> </span><span class="typ">$dZ</span><span class="pun">=</span><span class="atv">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">      </span><span class="typ">$x</span><span class="pln"> </span><span class="pun">+=</span><span class="pln"> </span><span class="typ">$dX</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">      </span><span class="typ">$y</span><span class="pln"> </span><span class="pun">+=</span><span class="pln"> </span><span class="typ">$dY</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">      </span><span class="typ">$z</span><span class="pln"> </span><span class="pun">+=</span><span class="pln"> </span><span class="typ">$dZ</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">      </span><span class="kwd">return</span><span class="pln"> </span><span class="typ">$self</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">   </span><span class="pun">}</span><span class="pln">
+</span><span class="pln">
+   </span><span class="pln">method</span><span class="pln"> </span><span class="pln">describe</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">      </span><span class="kwd">print</span><span class="pln"> </span><span class="str">&quot;A point at ($x, $y, $z)\n&quot;</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">   </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pln">
+</span><span class="pln">Point</span><span class="pun">-&gt;</span><span class="typ">new</span><span class="pun">(</span><span class="str">x</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="atv">5</span><span class="pun">,</span><span class="pln"> </span><span class="str">y</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="atv">10</span><span class="pun">)</span><span class="pun">-&gt;</span><span class="typ">move</span><span class="pun">(</span><span class="atv">1</span><span class="pun">,</span><span class="atv">1</span><span class="pun">)</span><span class="pun">-&gt;</span><span class="typ">describe</span><span class="pun">;</span><span class="pln">
+</span><span class="com"># A point at (6, 11, 0)</span></pre>    </div>
+  </div>  <div>
+    <div class="slide"><h2>Proper Try/Catch</h2><pre class="prettyprint"><span class="kwd">use</span><span class="pln"> </span><span class="pln">Feature::Compat::Try</span><span class="pun">;</span><span class="pln">
+</span><span class="pln"> 
+</span><span class="lit">sub</span><span class="pln"> </span><span class="typ">foo</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">   </span><span class="lit">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">      </span><span class="pln">attempt_a_thing</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">      </span><span class="kwd">return</span><span class="pln"> </span><span class="str">&quot;success&quot;</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">   </span><span class="pun">}</span><span class="pln">
+</span><span class="pln">   </span><span class="lit">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">$e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pln">      </span><span class="kwd">warn</span><span class="pln"> </span><span class="str">&quot;It failed - $e&quot;</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">      </span><span class="kwd">return</span><span class="pln"> </span><span class="str">&quot;failure&quot;</span><span class="pun">;</span><span class="pln">
+</span><span class="pln">   </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>    </div>
+  </div></div>
+<div id="footer">
+<p>Want to see more shiny perl code here? <a href="https://github.com/nicomen/shinyperl">Add a pull request</a></p>
+<p>Want to lean perl? <a href="https://learn.perl.org">https://learn.perl.org</a></p>
+</div>
+</body>
+</html>
