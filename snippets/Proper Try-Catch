@@ -2,8 +2,7 @@
 
 use Feature::Compat::Try;
  
-sub foo
-{
+sub foo {
    try {
       attempt_a_thing();
       return "success";
@@ -14,4 +13,4 @@ sub foo
    }
 }
 
-[% END %]
+#! [% END %]
