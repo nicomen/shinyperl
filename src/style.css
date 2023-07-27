@@ -26,7 +26,6 @@ div#footer { margin: auto; margin-top: 4rem; text-align: center; }
 
 pre { white-space: pre-wrap; user-select: text; text-align: left; }
 pre.prettyprint {
-  padding: 2rem;
   display: inline-block; 
   margin: auto;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
@@ -48,6 +47,10 @@ pre.prettyprint {
   .slick-prev:before,
   .slick-next:before {
     font-size: 4rem;
+  }
+  pre.prettyprint {
+    padding: 2rem;
+    font-size: 120%;
   }
 }
 
