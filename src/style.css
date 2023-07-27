@@ -5,8 +5,10 @@
   }
   pre.prettyprint {
     font-size: 1vh;
+    padding: 1rem;
   }
 }
+
 body {
   font-family: 'Baloo Tammudu 2', cursive;
   margin: 2rem;
@@ -24,13 +26,14 @@ div#footer { margin: auto; margin-top: 4rem; text-align: center; }
 
 pre { white-space: pre-wrap; user-select: text; text-align: left; }
 pre.prettyprint {
-  padding: 1rem;
+  padding: 2rem;
   display: inline-block; 
   margin: auto;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
   border-radius: 6px;
   min-width: 30em;
   max-width: 90%;
+  font-size: 120%;
 }
 
 .slick-prev { left: 2%; z-index: 1000; }
@@ -39,6 +42,7 @@ pre.prettyprint {
 .slick-next:before {
   color: #ffffff !important;
 }
+
 @media only screen and (min-width: 600px) {
   .slick-next, .slick-prev { width: 5%; width: 5%; font-size: 10rem; }
   .slick-prev:before,
